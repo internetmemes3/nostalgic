@@ -148,8 +148,8 @@ export default function InternetExploder() {
           <div className="mb-4 text-[14px]">
             <div className="text-[#ff00ff] mb-2">🔗 IMPORTANT LINKS 🔗</div>
             <div className="space-y-1">
-              <div><a href="#" className="text-[#00ffff] underline hover:text-[#ff0]" onClick={(e) => { e.preventDefault(); window.open('https://x.com/PLACEHOLDER', '_blank'); }}>📱 Twitter/X</a> - follow us before we get banned (again)</div>
-              <div><a href="#" className="text-[#00ffff] underline hover:text-[#ff0]" onClick={(e) => { e.preventDefault(); window.open('https://t.me/PLACEHOLDER', '_blank'); }}>💬 Telegram</a> - 24/7 chaos. no mods. we lost them.</div>
+              <div><a href="#" className="text-[#00ffff] underline hover:text-[#ff0]" onClick={(e) => { e.preventDefault(); window.open('https://x.com/nostalgicSolana', '_blank'); }}>📱 Twitter/X</a> - follow us before we get banned (again)</div>
+              <div><a href="#" className="text-[#00ffff] underline hover:text-[#ff0]" onClick={(e) => { e.preventDefault(); window.open('https://t.me/NostalgicPanel', '_blank'); }}>💬 Telegram</a> - 24/7 chaos. no mods. we lost them.</div>
               <div><a href="#" className="text-[#00ffff] underline hover:text-[#ff0]" onClick={(e) => { e.preventDefault(); window.open('https://dexscreener.com/PLACEHOLDER', '_blank'); }}>📊 Chart</a> - stare at the line. feel things. this is financial meditation.</div>
             </div>
           </div>

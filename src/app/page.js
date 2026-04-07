@@ -107,11 +107,11 @@ function CoinInfoPanel() {
           {/* Social Links */}
           <div className="flex gap-2 justify-center flex-wrap">
             <button className="win95-button px-3 py-1 text-[12px]"
-              onClick={() => window.open('https://x.com/PLACEHOLDER', '_blank')}>
+              onClick={() => window.open('https://x.com/nostalgicSolana', '_blank')}>
               🐦 Twitter/X
             </button>
             <button className="win95-button px-3 py-1 text-[12px]"
-              onClick={() => window.open('https://t.me/PLACEHOLDER', '_blank')}>
+              onClick={() => window.open('https://t.me/NostalgicPanel', '_blank')}>
               💬 Telegram
             </button>
             <button className="win95-button px-3 py-1 text-[12px]"
