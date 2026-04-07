@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .win95-button {
+    @apply bg-[#c0c0c0] 
+           border-2 
+           border-[#dfdfdf] 
+           border-r-[#0a0a0a] 
+           border-b-[#0a0a0a] 
+           active:border-[#0a0a0a] 
+           active:border-r-[#dfdfdf] 
+           active:border-b-[#dfdfdf]
+           font-['VT323'];
+  }
+
+  .win95-taskbar-divider {
+    @apply w-[1px] h-full bg-[#0a0a0a] shadow-[1px_0_#dfdfdf];
+  }
+} 

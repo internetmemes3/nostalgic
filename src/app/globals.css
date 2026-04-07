@@ -1,0 +1,364 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=VT323&family=Press+Start+2P&display=swap');
+
+/* ===== WIN97 CORE STYLES ===== */
+@layer components {
+  .win95-button {
+    @apply bg-[#c0c0c0] 
+           border-2 
+           border-[#dfdfdf] 
+           border-r-[#0a0a0a] 
+           border-b-[#0a0a0a] 
+           active:border-[#0a0a0a] 
+           active:border-r-[#dfdfdf] 
+           active:border-b-[#dfdfdf];
+    font-family: 'VT323', 'MS Sans Serif', 'Arial', sans-serif;
+  }
+
+  .win95-button-sm {
+    @apply win95-button text-xs px-2 py-0;
+  }
+
+  .win95-taskbar-divider {
+    @apply w-[1px] h-full bg-[#0a0a0a] shadow-[1px_0_#dfdfdf];
+  }
+
+  .win95-inset {
+    box-shadow: inset 1px 1px #0a0a0a, inset -1px -1px #dfdfdf;
+  }
+
+  .win95-outset {
+    box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #dfdfdf, 1px 1px #000;
+  }
+}
+
+:root {
+  --win-bg: #c0c0c0;
+  --win-title: #000080;
+  --win-title-inactive: #808080;
+  --win-text: #000000;
+  --win-highlight: #000080;
+  --win-highlight-text: #ffffff;
+  --desktop-bg: #008080;
+}
+
+* {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16'%3E%3Cpath d='M0 0l4 12 2-4 4 2z' fill='white' stroke='black' stroke-width='1'/%3E%3C/svg%3E") 0 0, auto;
+}
+
+body {
+  color: var(--win-text);
+  background: var(--desktop-bg);
+  font-family: 'VT323', 'MS Sans Serif', 'Arial', sans-serif;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: unset;
+}
+
+/* ===== BOOT SCREEN ===== */
+.boot-screen {
+  background: #000;
+  color: #aaa;
+  font-family: 'VT323', 'Courier New', monospace;
+  font-size: 16px;
+  line-height: 1.6;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+  overflow: hidden;
+}
+
+.boot-logo-screen {
+  background: #000;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+}
+
+.boot-logo-text {
+  font-family: 'Press Start 2P', 'VT323', monospace;
+  font-size: 36px;
+  color: #00ff00;
+  text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 40px #008000;
+  animation: glitch 0.3s infinite;
+  letter-spacing: 4px;
+}
+
+.boot-progress-bar {
+  width: 300px;
+  height: 20px;
+  border: 2px solid #333;
+  background: #000;
+  position: relative;
+  overflow: hidden;
+}
+
+.boot-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #000080 25%, #0000cc 25%, #0000cc 50%, #000080 50%, #000080 75%, #0000cc 75%);
+  background-size: 20px 100%;
+  animation: bootLoad 2.5s linear forwards, barberpole 0.5s linear infinite;
+}
+
+@keyframes bootLoad {
+  from { width: 0%; }
+  to { width: 100%; }
+}
+
+@keyframes barberpole {
+  from { background-position: 0 0; }
+  to { background-position: 20px 0; }
+}
+
+@keyframes glitch {
+  0%, 100% { transform: translate(0); }
+  20% { transform: translate(-2px, 1px); }
+  40% { transform: translate(2px, -1px); }
+  60% { transform: translate(-1px, -1px); }
+  80% { transform: translate(1px, 2px); }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+.boot-cursor {
+  animation: blink 1s step-end infinite;
+}
+
+/* ===== BLINKING TEXT (geocities style) ===== */
+.blink {
+  animation: blink 1s step-end infinite;
+}
+
+/* ===== MARQUEE ===== */
+.marquee-container {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.marquee-content {
+  display: inline-block;
+  animation: marquee 20s linear infinite;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+/* ===== SCANLINES OVERLAY ===== */
+.scanlines::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.03) 0px,
+    rgba(0, 0, 0, 0.03) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  z-index: 10000;
+}
+
+/* ===== CONTEXT MENU ===== */
+.context-menu {
+  background: #c0c0c0;
+  border: 2px outset #fff;
+  box-shadow: 2px 2px 0px #000;
+  font-family: 'VT323', 'MS Sans Serif', sans-serif;
+  font-size: 14px;
+  min-width: 180px;
+  z-index: 5000;
+  position: fixed;
+}
+
+.context-menu-item {
+  padding: 3px 20px;
+  cursor: pointer;
+  color: #000;
+}
+
+.context-menu-item:hover {
+  background: #000080;
+  color: #fff;
+}
+
+.context-menu-divider {
+  height: 1px;
+  background: #808080;
+  margin: 2px 2px;
+  box-shadow: 0 1px 0 #fff;
+}
+
+/* ===== SCROLLBAR WIN97 STYLE ===== */
+::-webkit-scrollbar {
+  width: 16px;
+  height: 16px;
+}
+
+::-webkit-scrollbar-track {
+  background: repeating-conic-gradient(#c0c0c0 0% 25%, #fff 0% 50%) 50% / 2px 2px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c0c0c0;
+  border: 1px outset #dfdfdf;
+  border-right-color: #0a0a0a;
+  border-bottom-color: #0a0a0a;
+}
+
+::-webkit-scrollbar-button {
+  background: #c0c0c0;
+  border: 1px outset #dfdfdf;
+  border-right-color: #0a0a0a;
+  border-bottom-color: #0a0a0a;
+  display: block;
+  height: 16px;
+  width: 16px;
+}
+
+/* ===== UNDER CONSTRUCTION GIF REPLACEMENTS ===== */
+.under-construction {
+  background: repeating-linear-gradient(
+    -45deg,
+    #000,
+    #000 10px,
+    #ffcc00 10px,
+    #ffcc00 20px
+  );
+  height: 8px;
+  width: 100%;
+}
+
+/* ===== GEOCITIES RAINBOW TEXT ===== */
+.rainbow-text {
+  background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: bold;
+}
+
+/* ===== MINESWEEPER ===== */
+.mine-cell {
+  width: 28px;
+  height: 28px;
+  background: #c0c0c0;
+  border: 2px outset #fff;
+  border-right-color: #808080;
+  border-bottom-color: #808080;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'VT323', monospace;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  user-select: none;
+}
+
+.mine-cell.revealed {
+  border: 1px solid #808080;
+}
+
+.mine-cell:active:not(.revealed) {
+  border: 1px solid #808080;
+}
+
+/* ===== PIXEL ART CANVAS (MS Dank) ===== */
+.pixel-grid {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+}
+
+/* ===== DESKTOP ICON SELECTION ===== */
+.desktop-icon-selected {
+  background: rgba(0, 0, 128, 0.4);
+}
+
+.desktop-icon-selected .icon-label {
+  background: #000080;
+  color: #fff;
+}
+
+/* ===== START MENU ===== */
+.start-menu {
+  position: fixed;
+  bottom: 40px;
+  left: 0;
+  background: #c0c0c0;
+  border: 2px outset #fff;
+  box-shadow: 2px -2px 0px #000;
+  z-index: 4000;
+  min-width: 200px;
+  font-family: 'VT323', 'MS Sans Serif', sans-serif;
+}
+
+.start-menu-sidebar {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  background: linear-gradient(to top, #000080, #1084d0);
+  color: white;
+  font-family: 'VT323', 'MS Sans Serif', sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 8px 4px;
+  letter-spacing: 2px;
+}
+
+.start-menu-item {
+  padding: 6px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.start-menu-item:hover {
+  background: #000080;
+  color: #fff;
+}
+
+/* ===== DRAGGABLE WINDOW ===== */
+.win-dragging {
+  user-select: none;
+}
+
+/* ===== SELECTION ===== */
+::selection {
+  background: #000080;
+  color: #fff;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .boot-logo-text {
+    font-size: 20px;
+  }
+  .boot-progress-bar {
+    width: 200px;
+  }
+}
