@@ -14,8 +14,11 @@ const SILLY_PROGRAMS = [
   { icon: '📞', label: 'Dial-Up Connector', action: () => alert('🔊 BEEEE BOOO BRRRRR KSSSHHHH DINGDINGDING\n\nConnecting to the internet...\n\nSpeed: 56kbps (on a good day)\n\n⚠️ WARNING: Someone is trying to call the house. Connection will be lost.') },
   { icon: '🧮', label: 'Portfolio Calculator', action: () => alert('PORTFOLIO CALCULATOR v1.0\n\nCalculating your gains...\n\n...\n...\n\nResult: ✨ INCALCULABLE ✨\n\n(this calculator only goes up)') },
   { icon: '🦠', label: 'Norton AntiRug 2003', action: () => alert('🛡️ NORTON ANTIRUG 2003\n\nScanning for rugs...\n\nC:\\definitely_not_a_rug.exe — CLEAN ✅\nC:\\trust_me_bro.dll — CLEAN ✅\nSummary: Your bags are safe. Probably. We are not liable.') },
-  { icon: '🗺️', label: 'Roadmap.exe', action: () => alert('LOADING ROADMAP...\n\n❌ Error: File not found.\n\nThe roadmap was last seen heading north.\nIf found, please return to $NOSTALGIC headquarters\n(which is someone\'s basement).') },
+  { icon: '🗺️', label: 'Roadmap.exe', action: () => alert('LOADING ROADMAP...\n\n❌ Error: File not found.\n\nThe roadmap was last seen heading north.\nIf found, please return to $NLGC headquarters\n(which is someone\'s basement).') },
   { icon: '🎰', label: 'luck_check.exe', action: () => { const outcomes = ['You will 100x by Friday. (not financial advice)', 'A mysterious whale is watching your wallet. Stay calm.', 'Your next trade will be legendary. Or terrible. 50/50.', 'The stars say: BUY. The stars are not financial advisors.', 'You will find a forgotten wallet with 0.001 SOL. Life changing.', 'A dev will follow you on Twitter today. This means nothing.']; alert('🔮 LUCK CHECK v4.20\n\n' + outcomes[Math.floor(Math.random() * outcomes.length)]); }},
+  { icon: '🪩', label: 'party.exe', action: () => { document.body.classList.add('rave-mode'); const emojis = ['🚀','🌕','💎','💰','✨','🔥']; for(let i=0;i<20;i++){const el=document.createElement('div');el.className='float-emoji';el.textContent=emojis[Math.floor(Math.random()*emojis.length)];el.style.left=Math.random()*window.innerWidth+'px';el.style.top=(window.innerHeight*0.3+Math.random()*window.innerHeight*0.5)+'px';el.style.animationDelay=(Math.random()*1)+'s';document.body.appendChild(el);setTimeout(()=>el.remove(),2500);} setTimeout(()=>document.body.classList.remove('rave-mode'),2000); }},
+  { icon: '🔄', label: 'screen_flip.exe', action: () => { document.body.style.transition='transform 1s';document.body.style.transform='scaleY(-1)';setTimeout(()=>{document.body.style.transform='none';setTimeout(()=>{document.body.style.transition='';},500);},2000); }},
+  { icon: '💾', label: 'download_more_ram.exe', action: () => { const w=window.open('','','width=340,height=120');if(w){w.document.write('<html><head><title>Downloading RAM...</title></head><body style="background:#c0c0c0;font-family:VT323,monospace;padding:15px"><b>Downloading 69GB of RAM...</b><br><br><div style="border:2px inset #808080;height:18px;background:#fff"><div style="height:100%;background:linear-gradient(90deg,#000080,#0000cc);animation:fill 3s ease-in-out forwards"></div></div><style>@keyframes fill{from{width:0}to{width:100%}}</style><br><span id="s">Please wait...</span><script>setTimeout(function(){document.getElementById("s").textContent="\u2705 Complete! Your computer now has 69GB more RAM. (It doesn\'t.)"}, 3000);<\/script></body></html>'); } }},
 ];
 
 export default function StartMenu({ onItemClick }) {
@@ -26,7 +29,7 @@ export default function StartMenu({ onItemClick }) {
   const handleRun = () => {
     const cmd = runText.toLowerCase().trim();
     if (cmd === '' || cmd === 'moon') {
-      alert('🚀 Launching moon sequence...\n\n...\n\nJust kidding. But $NOSTALGIC IS going to the moon.\nThis is a fact and not speculation.');
+      alert('🚀 Launching moon sequence...\n\n...\n\nJust kidding. But $NLGC IS going to the moon.\nThis is a fact and not speculation.');
     } else if (cmd === 'help') {
       alert('AVAILABLE COMMANDS:\n\nmoon — go to the moon\nlambo — check lambo status\nrug — ???\ngm — say gm\nwagmi — confirm wagmi\n\nAll other commands will be interpreted as bullish.');
     } else if (cmd === 'lambo') {
@@ -34,7 +37,7 @@ export default function StartMenu({ onItemClick }) {
     } else if (cmd === 'rug') {
       alert('⚠️ ACCESS DENIED\n\nThe command "rug" has been permanently disabled.\nThis is a rug-free zone.\nPlease touch grass and try again.');
     } else if (cmd === 'gm') {
-      alert('☀️ gm\n\ngm to you too fren.\n\nAnother beautiful day to hold $NOSTALGIC.');
+      alert('☀️ gm\n\ngm to you too fren.\n\nAnother beautiful day to hold $NLGC.');
     } else if (cmd === 'wagmi') {
       alert('✅ WAGMI CONFIRMED\n\nAll systems indicate: We Are Gonna Make It.\n\nThis message was approved by the vibes department.');
     } else {
@@ -91,14 +94,14 @@ export default function StartMenu({ onItemClick }) {
           {/* Quick launch items */}
           <div className="start-menu-item" onClick={() => onItemClick('coin')}>
             <img src="/icons/logo.png" alt="" style={{ width: '20px', height: '20px' }} />
-            <span>$NOSTALGIC Info</span>
+            <span>$NLGC Info</span>
           </div>
           <div className="start-menu-item" onClick={() => onItemClick('notepad')}>
             <img src="/icons/notepad.png" alt="" style={{ width: '20px', height: '20px' }} />
             <span>note_to_the_future.txt</span>
           </div>
           <div className="start-menu-item" onClick={() => {
-            alert('🔍 FIND: Searching for gains...\n\n0 results found.\n\nTry searching again after buying more $NOSTALGIC.');
+            alert('🔍 FIND: Searching for gains...\n\n0 results found.\n\nTry searching again after buying more $NLGC.');
           }}>
             <span style={{ fontSize: '18px', width: '24px', textAlign: 'center', display: 'inline-block' }}>🔍</span>
             <span>Find...</span>

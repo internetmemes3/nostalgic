@@ -58,7 +58,7 @@ export default function MSDank() {
         {/* Canvas */}
         <div className="flex-1 bg-white p-4 flex flex-col items-center justify-center" style={{ minHeight: '350px' }}>
           <div className="text-[10px] text-[#808080] mb-2 text-center" style={{ fontFamily: "'VT323', monospace" }}>
-            masterpiece.bmp — &quot;$NOSTALGIC to the Moon&quot; by anon (2003)
+            masterpiece.bmp — &quot;$NLGC to the Moon&quot; by anon (2003)
           </div>
 
           {/* Moon */}

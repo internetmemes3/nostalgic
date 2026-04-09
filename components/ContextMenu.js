@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 const SILLY_MESSAGES = [
   "ERROR 420: Gains not found",
@@ -11,6 +11,19 @@ const SILLY_MESSAGES = [
   "This is financial advice (it's not)",
   "Error: Wallet too light to perform this action",
 ];
+
+function spawnEmojiBurst(x, y, emojis = ['🚀','🌕','💎','🙌','💰','📈','🔥','✨']) {
+  for (let i = 0; i < 12; i++) {
+    const el = document.createElement('div');
+    el.className = 'float-emoji';
+    el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    el.style.left = (x + (Math.random() - 0.5) * 200) + 'px';
+    el.style.top = (y + Math.random() * 40) + 'px';
+    el.style.animationDelay = (Math.random() * 0.4) + 's';
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 2000);
+  }
+}
 
 export default function ContextMenu({ x, y, onClose, onOpenWindow, onClippy, onBSOD }) {
   const [alertMsg, setAlertMsg] = useState(null);
@@ -56,6 +69,34 @@ export default function ContextMenu({ x, y, onClose, onOpenWindow, onClippy, onB
     onClose();
   };
 
+  const handleRaveMode = (e) => {
+    e.stopPropagation();
+    document.body.classList.add('rave-mode');
+    setTimeout(() => document.body.classList.remove('rave-mode'), 2000);
+    onClose();
+  };
+
+  const handleScreenShake = (e) => {
+    e.stopPropagation();
+    document.body.classList.add('screen-shake');
+    spawnEmojiBurst(window.innerWidth / 2, window.innerHeight / 2, ['💥','🤯','😵','⚡','🔨','💀']);
+    setTimeout(() => document.body.classList.remove('screen-shake'), 500);
+    onClose();
+  };
+
+  const handleMeltdown = (e) => {
+    e.stopPropagation();
+    document.body.classList.add('meltdown');
+    setTimeout(() => document.body.classList.remove('meltdown'), 1500);
+    onClose();
+  };
+
+  const handleEmojiBurst = (e) => {
+    e.stopPropagation();
+    spawnEmojiBurst(e.clientX, e.clientY);
+    onClose();
+  };
+
   return (
     <div
       className="context-menu"
@@ -68,9 +109,15 @@ export default function ContextMenu({ x, y, onClose, onOpenWindow, onClippy, onB
       <div className="context-menu-item" onClick={handleScreenFlip}>
         🔄 Invert Colors (prank mode)
       </div>
+      <div className="context-menu-item" onClick={handleRaveMode}>
+        🪩 Rave Mode (party.exe)
+      </div>
       <div className="context-menu-divider" />
       <div className="context-menu-item" onClick={() => { onOpenWindow('notepad'); onClose(); }}>
         📝 New → Text Document
+      </div>
+      <div className="context-menu-item" onClick={handleEmojiBurst}>
+        🚀 Deploy Rocket Emojis
       </div>
       <div className="context-menu-item" onClick={handleSilly}>
         📁 Arrange Icons by Market Cap
@@ -82,12 +129,15 @@ export default function ContextMenu({ x, y, onClose, onOpenWindow, onClippy, onB
       <div className="context-menu-item" onClick={handleViewSource}>
         💻 View Source Code
       </div>
-      <div className="context-menu-item" onClick={handleSilly}>
-        🎨 Display Properties
+      <div className="context-menu-item" onClick={handleScreenShake}>
+        🔨 Defragment Hard Drive
+      </div>
+      <div className="context-menu-item" onClick={handleMeltdown}>
+        🫠 Reality Distortion Field
       </div>
       <div className="context-menu-divider" />
       <div className="context-menu-item" onClick={(e) => { e.stopPropagation(); onClippy && onClippy(); onClose(); }}>
-        � Summon Clippy
+        📎 Summon Clippy
       </div>
       <div className="context-menu-item" onClick={(e) => { e.stopPropagation(); onBSOD && onBSOD(); onClose(); }}>
         💀 crash_system.exe

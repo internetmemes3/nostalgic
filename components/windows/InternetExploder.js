@@ -1,10 +1,42 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+
+const FAKE_ADS = [
+  { title: 'HOT SINGLES IN YOUR BLOCKCHAIN', body: 'Local validators HATE this one weird trick! Click here to stake your... wait, this is not that kind of site.' },
+  { title: 'CONGRATULATIONS!!!', body: 'You are the 1,000,000th visitor! Your prize: the emotional satisfaction of being part of $NLGC. (There is no other prize.)' },
+  { title: 'WANT TO 1000X??', body: 'Doctors HATE this one weird coin! It\'s $NLGC! Actually doctors have no opinion on this. We asked. They were confused.' },
+  { title: 'FREE DOWNLOAD', body: 'Download more RAM for your wallet! WARNING: This is not real. Nothing on this website is real. Except $NLGC. That\'s real.' },
+  { title: 'YOU WON A FREE iPOD', body: 'Just kidding, it\'s 2026 and iPods don\'t exist anymore. But $NLGC does. So that\'s something.' },
+];
+
+function spawnFloatingText(x, y, text, color = '#00ff00') {
+  const el = document.createElement('div');
+  el.className = 'float-emoji';
+  el.textContent = text;
+  el.style.left = x + 'px';
+  el.style.top = y + 'px';
+  el.style.fontSize = '16px';
+  el.style.color = color;
+  el.style.fontFamily = "'VT323', monospace";
+  el.style.textShadow = '1px 1px 0 #000';
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 1500);
+}
 
 export default function InternetExploder() {
   const [hits, setHits] = useState(69420);
   const [showPopup, setShowPopup] = useState(false);
   const [popupMsg, setPopupMsg] = useState('');
+  const [fakeAd, setFakeAd] = useState(null);
+  const [guestbookName, setGuestbookName] = useState('');
+  const [guestbookEntries, setGuestbookEntries] = useState([]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setFakeAd(FAKE_ADS[Math.floor(Math.random() * FAKE_ADS.length)]);
+    }, 5000 + Math.random() * 10000);
+    return () => clearTimeout(timer);
+  }, []);
 
   const triggerPopup = (msg) => {
     setPopupMsg(msg);
@@ -27,17 +59,21 @@ export default function InternetExploder() {
       {/* Browser toolbar */}
       <div className="flex items-center gap-1 px-1 py-1 bg-[#c0c0c0] border-b border-[#808080]">
         <button className="win95-button text-[11px] px-2 py-0" onClick={() => triggerPopup('There is no going back. Only forward. This is crypto.')}>⬅ Back</button>
-        <button className="win95-button text-[11px] px-2 py-0" onClick={() => triggerPopup('You are already in the future. The future is $NOSTALGIC.')}>➡ Forward</button>
+        <button className="win95-button text-[11px] px-2 py-0" onClick={() => triggerPopup('You are already in the future. The future is $NLGC.')}>➡ Forward</button>
         <button className="win95-button text-[11px] px-2 py-0" onClick={() => triggerPopup('ERROR: Cannot stop. The blockchain has no brakes.')}>🛑 Stop</button>
         <button className="win95-button text-[11px] px-2 py-0" onClick={() => { setHits(h => h + Math.floor(Math.random() * 1000)); triggerPopup('Page refreshed. You are now 1000x more bullish.'); }}>🔄 Refresh</button>
-        <button className="win95-button text-[11px] px-2 py-0" onClick={() => triggerPopup('🏠 Home page set to: $NOSTALGIC\n\nYour browser homepage has been permanently changed. You\'re welcome.')}>🏠 Home</button>
+        <button className="win95-button text-[11px] px-2 py-0" onClick={() => triggerPopup('🏠 Home page set to: $NLGC\n\nYour browser homepage has been permanently changed. You\'re welcome.')}>🏠 Home</button>
       </div>
       <div className="flex items-center gap-1 px-1 py-1 bg-[#c0c0c0] border-b border-[#808080]">
         <span className="text-[11px] font-bold">Address:</span>
         <div className="flex-1 bg-white border px-1 text-[11px]" style={{ boxShadow: 'inset 1px 1px #808080' }}>
           http://www.geocities.com/Area51/Vault/4269/nostalgic_official.html
         </div>
-        <button className="win95-button text-[11px] px-2 py-0">Go</button>
+        <button className="win95-button text-[11px] px-2 py-0" onClick={() => {
+          document.body.classList.add('dramatic-zoom');
+          setTimeout(() => document.body.classList.remove('dramatic-zoom'), 600);
+          triggerPopup('NAVIGATING... just kidding, you are already here. There is nowhere else to go.');
+        }}>Go</button>
       </div>
 
       {/* GEOCITIES PAGE */}
@@ -48,7 +84,7 @@ export default function InternetExploder() {
         <div className="p-4 text-center">
           {/* Header */}
           <div className="text-[28px] rainbow-text mb-2">
-            ★·.·´¯`·.·★ $NOSTALGIC ★·.·´¯`·.·★
+            ★·.·´¯`·.·★ $NLGC ★·.·´¯`·.·★
           </div>
           <div className="text-[#ff00ff] text-[14px] mb-1">
             ~ The Only Website That Matters ~
@@ -64,14 +100,14 @@ export default function InternetExploder() {
 
           {/* Welcome */}
           <div className="text-left text-[14px] text-[#00ffff] mb-4">
-            <p className="mb-2">👋 hello and welcome to the OFFICIAL $NOSTALGIC homepage!! 👋</p>
+            <p className="mb-2">👋 hello and welcome to the OFFICIAL Nostalgic ($NLGC) homepage!! 👋</p>
             <p className="text-[#ff6600] mb-2">
               this page was made at 3am to tell you about the greatest
               thing to happen to the internet since someone figured out how to put music on websites
               that you CANNOT turn off
             </p>
             <p className="text-[#00ff00] mb-2">
-              $NOSTALGIC is a coin for everyone who remembers when the internet was GOOD.
+              $NLGC is a coin for everyone who remembers when the internet was GOOD.
               when every website had a visitor counter and a guestbook and at least one page
               that was permanently &quot;under construction&quot; for years straight. 🚧
             </p>
@@ -83,7 +119,7 @@ export default function InternetExploder() {
           {/* Marquee */}
           <div className="marquee-container mb-4 border-y border-[#00ff00] py-1">
             <div className="marquee-content text-[#ff0] text-[14px]">
-              📢 BREAKING NEWS: $NOSTALGIC has been officially recognized by absolutely nobody of importance!! 📢 Chart looking like the pipes screensaver!! 📢 Dev is alive and simply built different!! 📢
+              📢 BREAKING NEWS: $NLGC has been officially recognized by absolutely nobody of importance!! 📢 Chart looking like the pipes screensaver!! 📢 Dev is alive and simply built different!! 📢 Ticker is $NLGC because we ran out of vowels!! 📢
             </div>
           </div>
 
@@ -118,8 +154,8 @@ export default function InternetExploder() {
               <li>Get a wallet (it lives in your browser)</li>
               <li>Buy some SOL (the fast money that goes zoom)</li>
               <li>Go to Jupiter or Raydium (space themed exchanges, very on brand)</li>
-              <li>Paste the contract address: <span className="text-[#ff0] break-all">PASTE_CONTRACT_ADDRESS_HERE</span></li>
-              <li>Swap SOL for $NOSTALGIC</li>
+              <li>Paste the contract address: <span className="text-[#ff0] break-all">CONTRACT_SOON</span></li>
+              <li>Swap SOL for $NLGC (Nostalgic)</li>
               <li>Tell your friends, your enemies, your dentist, everyone</li>
               <li>There is no step 7. You are done. Congratulations. You are now nostalgic.</li>
             </ol>
@@ -139,7 +175,7 @@ export default function InternetExploder() {
               </div>
               <div>
                 <span className="text-[#888]">[Posted JUST NOW]</span><br/>
-                <span className="text-[#0f0]">&quot;im not saying im from the future but $NOSTALGIC is the last coin you will ever need to buy. i am definitely from the present. please do not investigate further.&quot;</span>
+                <span className="text-[#0f0]">&quot;im not saying im from the future but $NLGC is the last coin you will ever need to buy. i am definitely from the present. please do not investigate further.&quot;</span>
               </div>
             </div>
           </div>
@@ -158,17 +194,50 @@ export default function InternetExploder() {
           <div className="border border-[#666] p-2 mb-4 text-[11px] text-[#888] text-center">
             ⬅ <span className="text-[#0ff] cursor-pointer" onClick={() => triggerPopup('ERROR 404: The previous site in this webring was rugged.')}>Prev</span>
             {' | '}
-            <span className="text-[#ff0]">🌐 $NOSTALGIC WebRing — 1 of 1 sites 🌐</span>
+            <span className="text-[#ff0]">🌐 $NLGC WebRing — 1 of 1 sites 🌐</span>
             {' | '}
-            <span className="text-[#0ff] cursor-pointer" onClick={() => triggerPopup('You have reached the end of the internet. There is nothing after $NOSTALGIC.')}>Next</span> ➡
+            <span className="text-[#0ff] cursor-pointer" onClick={() => triggerPopup('You have reached the end of the internet. There is nothing after $NLGC.')}>Next</span> ➡
+          </div>
+
+          {/* Sign the Guestbook */}
+          <div className="border border-[#00ff00] p-2 mb-4 text-left">
+            <div className="text-[#ff00ff] text-[14px] mb-2 text-center">✍️ SIGN THE GUESTBOOK ✍️</div>
+            <div className="flex gap-1 items-center mb-1">
+              <input
+                className="flex-1 bg-[#000022] border border-[#00ff00] text-[#0f0] px-2 py-1 text-[12px]"
+                style={{ fontFamily: "'VT323', monospace" }}
+                placeholder="enter your name, anon..."
+                value={guestbookName}
+                onChange={(e) => setGuestbookName(e.target.value)}
+                onKeyDown={(e) => { if (e.key === 'Enter' && guestbookName.trim()) { setGuestbookEntries(prev => [...prev, guestbookName.trim()]); setGuestbookName(''); }}}
+                maxLength={30}
+              />
+              <button className="win95-button text-[10px] px-2 py-0 text-black" onClick={() => {
+                if (!guestbookName.trim()) { triggerPopup('You need a name! Even "anon" counts.'); return; }
+                setGuestbookEntries(prev => [...prev, guestbookName.trim()]);
+                setGuestbookName('');
+                triggerPopup('Guestbook signed! You are now part of internet history.');
+              }}>Sign!</button>
+            </div>
+            {guestbookEntries.length > 0 && (
+              <div className="text-[11px] text-[#0f0] space-y-[2px] max-h-[60px] overflow-auto">
+                {guestbookEntries.map((name, i) => (
+                  <div key={i}><span className="text-[#ff0]">{name}:</span> was here! $NLGC to the moon!! 🚀</div>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Hit Counter */}
           <div className="under-construction mb-2" />
           <div className="text-[#808080] text-[12px] mt-2">
-            <div className="inline-block bg-black border border-[#333] px-2 py-1">
+            <div className="inline-block bg-black border border-[#333] px-2 py-1 cursor-pointer" onClick={(e) => {
+              const bonus = Math.floor(Math.random() * 9999) + 1;
+              setHits(h => h + bonus);
+              spawnFloatingText(e.clientX, e.clientY, `+${bonus.toLocaleString()} visitors!`, '#00ff00');
+            }}>
               You are visitor number: <span className="text-[#00ff00] font-bold">{hits.toLocaleString()}</span>
-              <span className="text-[8px] text-[#444]"> (this number is 100% accurate and not made up at all)</span>
+              <span className="text-[8px] text-[#444]"> (click to recruit more visitors)</span>
             </div>
           </div>
           <div className="text-[10px] text-[#555] mt-3 space-y-1">
@@ -179,6 +248,23 @@ export default function InternetExploder() {
         </div>
         <div className="under-construction" />
       </div>
+      {/* Fake Popup Ad */}
+      {fakeAd && (
+        <div className="absolute bottom-4 left-4 z-50 bg-[#c0c0c0] border-2 shadow-lg" style={{ borderColor: '#fff #0a0a0a #0a0a0a #fff', maxWidth: '220px' }}>
+          <div className="bg-[#000080] text-white text-[11px] px-2 py-[2px] flex justify-between items-center">
+            <span>⚠️ Special Offer!!!</span>
+            <button className="text-white text-[10px] bg-[#c0c0c0] text-black border px-1 leading-none" style={{ borderColor: '#fff #0a0a0a #0a0a0a #fff' }} onClick={() => setFakeAd(null)}>✕</button>
+          </div>
+          <div className="p-2">
+            <div className="text-[11px] font-bold text-[#ff0000] blink mb-1">{fakeAd.title}</div>
+            <div className="text-[10px] text-black">{fakeAd.body}</div>
+            <div className="flex gap-1 mt-2">
+              <button className="win95-button text-[9px] px-2" onClick={() => { setFakeAd(null); triggerPopup('You clicked OK on a popup ad in 2026. Respect.'); }}>OK!</button>
+              <button className="win95-button text-[9px] px-2" onClick={() => { setFakeAd(null); triggerPopup('Ad closed. Another one will find you. They always do.'); }}>No thanks</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

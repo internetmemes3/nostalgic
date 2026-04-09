@@ -40,7 +40,7 @@ IMPORTANT PREDICTION: i think one day someone will
 make a coin that is about remembering all of THIS. 
 like, right now. the old internet. the dial up sounds. 
 the way everything looks kinda ugly but in a beautiful 
-way. they will call it something like $NOSTALGIC because 
+way. they will call it something like $NLGC because 
 thats what it will be about, missing the good old days 
 when the internet was weird, fun and free.
 
@@ -49,7 +49,7 @@ that means i was RIGHT. about ALL of it. the computer
 money, the invisible notebook, the dog coins, everything. 
 i was a genius and nobody listened to me
 
-if $NOSTALGIC is real right now... BUY IT. not because 
+if $NLGC is real right now... BUY IT. not because 
 i understand economics (i do not) but 
 because its proof that the future turned out exactly 
 as weird as i hoped it would.
@@ -65,7 +65,7 @@ im just a text file from 1999.
 
 P.S. if the invisible notebook people are reading 
 this, im available for consulting. i accept payment 
-in $NOSTALGIC coins or pizza rolls.
+in $NLGC coins or pizza rolls.
 
 `;
 

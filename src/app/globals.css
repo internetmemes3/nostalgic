@@ -353,6 +353,97 @@ body {
   color: #fff;
 }
 
+/* ===== CREATIVE MEME ANIMATIONS ===== */
+@keyframes screenShake {
+  0%, 100% { transform: translate(0); }
+  10% { transform: translate(-8px, 4px); }
+  20% { transform: translate(6px, -6px); }
+  30% { transform: translate(-4px, 8px); }
+  40% { transform: translate(8px, 2px); }
+  50% { transform: translate(-6px, -4px); }
+  60% { transform: translate(4px, 6px); }
+  70% { transform: translate(-2px, -8px); }
+  80% { transform: translate(6px, 4px); }
+  90% { transform: translate(-4px, -2px); }
+}
+
+.screen-shake {
+  animation: screenShake 0.5s ease-in-out;
+}
+
+@keyframes dramaticZoom {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.15) rotate(2deg); }
+  100% { transform: scale(1); }
+}
+
+.dramatic-zoom {
+  animation: dramaticZoom 0.6s ease-in-out;
+}
+
+@keyframes spinToWin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(720deg); }
+}
+
+.spin-to-win {
+  animation: spinToWin 1s ease-in-out;
+}
+
+@keyframes raveMode {
+  0% { filter: hue-rotate(0deg) brightness(1); }
+  25% { filter: hue-rotate(90deg) brightness(1.3); }
+  50% { filter: hue-rotate(180deg) brightness(1); }
+  75% { filter: hue-rotate(270deg) brightness(1.3); }
+  100% { filter: hue-rotate(360deg) brightness(1); }
+}
+
+.rave-mode {
+  animation: raveMode 2s linear;
+}
+
+@keyframes meltdown {
+  0% { transform: skewX(0deg) skewY(0deg); filter: blur(0); }
+  25% { transform: skewX(5deg) skewY(2deg); filter: blur(1px); }
+  50% { transform: skewX(-3deg) skewY(-4deg); filter: blur(2px); }
+  75% { transform: skewX(4deg) skewY(1deg); filter: blur(1px); }
+  100% { transform: skewX(0deg) skewY(0deg); filter: blur(0); }
+}
+
+.meltdown {
+  animation: meltdown 1.5s ease-in-out;
+}
+
+@keyframes floatUp {
+  0% { opacity: 1; transform: translateY(0) scale(1); }
+  100% { opacity: 0; transform: translateY(-120px) scale(1.5); }
+}
+
+.float-emoji {
+  position: fixed;
+  pointer-events: none;
+  z-index: 99998;
+  font-size: 32px;
+  animation: floatUp 1.5s ease-out forwards;
+}
+
+@keyframes fakeProgress {
+  0% { width: 0%; }
+  15% { width: 23%; }
+  40% { width: 45%; }
+  55% { width: 47%; }
+  70% { width: 72%; }
+  85% { width: 88%; }
+  95% { width: 94%; }
+  100% { width: 100%; }
+}
+
+.fake-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #000080, #0000cc);
+  animation: fakeProgress 3s ease-in-out forwards;
+}
+
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
   .boot-logo-text {

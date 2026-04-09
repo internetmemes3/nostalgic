@@ -16,13 +16,13 @@ import Notepad from '../../components/windows/Notepad';
 import Clippy from '../../components/Clippy';
 
 const WINDOW_DEFS = {
-  mycomputer: { title: 'My Computer - C:\\My_Bags\\$NOSTALGIC', component: MyComputer },
-  internet: { title: 'Internet Exploder 4.0 - $NOSTALGIC Fan Page', component: InternetExploder },
+  mycomputer: { title: 'My Computer - C:\\My_Bags\\$NLGC', component: MyComputer },
+  internet: { title: 'Internet Exploder 4.0 - $NLGC Fan Page', component: InternetExploder },
   msdank: { title: 'MS Dank - masterpiece.bmp', component: MSDank },
   recycle: { title: 'Recycle Bin - Rugged & Forgotten', component: RecycleBin },
   minesweeper: { title: 'Minesweeper - Crypto Edition', component: Minesweeper },
   notepad: { title: 'Notepad - untitled.txt', component: Notepad },
-  coin: { title: '$NOSTALGIC — System Information', component: CoinInfoPanel },
+  coin: { title: '$NLGC — System Information', component: CoinInfoPanel },
 };
 
 const DESKTOP_ICONS = [
@@ -32,7 +32,7 @@ const DESKTOP_ICONS = [
   { id: 'recycle', icon: '/icons/recycle.png', label: 'Recycle Bin' },
   { id: 'minesweeper', icon: '/icons/minesweeper.png', label: 'Minesweeper' },
   { id: 'notepad', icon: '/icons/notepad.png', label: 'Notepad' },
-  { id: 'coin', icon: '/icons/logo.png', label: '$NOSTALGIC\nInfo' },
+  { id: 'coin', icon: '/icons/logo.png', label: '$NLGC\nInfo' },
 ];
 
 function CoinInfoPanel() {
@@ -56,9 +56,9 @@ function CoinInfoPanel() {
           {/* Logo Area */}
           <div className="text-center mb-3">
             <div className="text-[24px] font-bold text-[#000080]" style={{ fontFamily: "'Press Start 2P', monospace", fontSize: '16px' }}>
-              $NOSTALGIC
+              $NLGC
             </div>
-            <div className="text-[11px] text-[#808080]">NostalgicOS 97 — System Information</div>
+            <div className="text-[11px] text-[#808080]">Nostalgic ($NLGC) — NostalgicOS 97 System Information</div>
           </div>
 
           <div className="bg-white border p-2 mb-2 text-[12px]" style={{ boxShadow: 'inset 1px 1px #808080' }}>
@@ -66,9 +66,13 @@ function CoinInfoPanel() {
               <tbody>
                 <tr className="border-b border-[#e0e0e0]">
                   <td className="py-1 font-bold text-[#000080] w-[140px]">Token Name:</td>
-                  <td className="py-1">$NOSTALGIC</td>
+                  <td className="py-1">Nostalgic</td>
                 </tr>
                 <tr className="border-b border-[#e0e0e0] bg-[#f8f8f8]">
+                  <td className="py-1 font-bold text-[#000080]">Ticker:</td>
+                  <td className="py-1 font-bold">$NLGC</td>
+                </tr>
+                <tr className="border-b border-[#e0e0e0]">
                   <td className="py-1 font-bold text-[#000080]">Blockchain:</td>
                   <td className="py-1">Solana</td>
                 </tr>
@@ -86,7 +90,7 @@ function CoinInfoPanel() {
                 </tr>
                 <tr className="border-b border-[#e0e0e0] bg-[#f8f8f8]">
                   <td className="py-1 font-bold text-[#000080]">Contract:</td>
-                  <td className="py-1 break-all text-[11px]">PASTE_CONTRACT_ADDRESS_HERE</td>
+                  <td className="py-1 break-all text-[11px]">CONTRACT_SOON</td>
                 </tr>
               </tbody>
             </table>
@@ -96,9 +100,9 @@ function CoinInfoPanel() {
           <div className="bg-[#ffffcc] border border-[#808080] p-2 mb-2 text-[12px]">
             <div className="font-bold text-[#800000] mb-1">📋 How to Buy:</div>
             <div className="text-[11px] space-y-1">
-              <div>1. Install Phantom Wallet</div>
-              <div>2. Buy SOL on an exchange → send to Phantom</div>
-              <div>3. Go to Jupiter (jup.ag) or Raydium</div>
+              <div>1. Install Wallet</div>
+              <div>2. Get SOL</div>
+              <div>3. Go to Jupiter or Raydium</div>
               <div>4. Paste contract address & swap</div>
               <div>5. Welcome to the club 🤝</div>
             </div>
@@ -115,7 +119,7 @@ function CoinInfoPanel() {
               💬 Telegram
             </button>
             <button className="win95-button px-3 py-1 text-[12px]"
-              onClick={() => window.open('https://dexscreener.com/PLACEHOLDER', '_blank')}>
+              onClick={() => window.open('https://dexscreener.com/', '_blank')}>
               📊 Dexscreener
             </button>
           </div>
@@ -214,8 +218,8 @@ export default function Home() {
   const handleStartItemClick = (id) => {
     setStartOpen(false);
     if (id === 'shutdown') {
-      if (confirm('It is now safe to turn off your computer.\n\n(Just kidding, please stay and buy $NOSTALGIC)')) {
-        document.body.innerHTML = '<div style="background:#000080;color:#fff;display:flex;align-items:center;justify-content:center;height:100vh;font-family:VT323,monospace;font-size:24px;text-align:center">It is now safe to turn off<br>your computer.<br><br><span style="font-size:14px">(refresh to reboot into $NOSTALGIC)</span></div>';
+      if (confirm('It is now safe to turn off your computer.\n\n(Just kidding, please stay and buy $NLGC)')) {
+        document.body.innerHTML = '<div style="background:#000080;color:#fff;display:flex;align-items:center;justify-content:center;height:100vh;font-family:VT323,monospace;font-size:24px;text-align:center">It is now safe to turn off<br>your computer.<br><br><span style="font-size:14px">(refresh to reboot into $NLGC)</span></div>';
       }
       return;
     }
@@ -247,12 +251,12 @@ export default function Home() {
         <div className="text-white max-w-[600px] text-[16px] leading-relaxed">
           <p className="mb-4">A fatal exception 0x0420069 has occurred at 0028:C0FF33EE in VxD MOON(01) +
           00000000. The current application will be terminated.</p>
-          <p className="mb-4">* Press any key to return to $NOSTALGIC desktop</p>
+          <p className="mb-4">* Press any key to return to $NLGC desktop</p>
           <p className="mb-4">* Press CTRL+ALT+DEL to pretend this never happened</p>
           <p className="mb-4">You will lose any unsaved gains in all portfolios.</p>
           <p className="mb-2">Press any key to continue <span className="blink">_</span></p>
           <p className="text-[12px] text-[#8888ff] mt-8">
-            NOSTALGIC_KERNEL_PANIC - BAGS_TOO_HEAVY_ERROR<br/>
+            NLGC_KERNEL_PANIC - BAGS_TOO_HEAVY_ERROR<br/>
             Error Code: 0xDEADBEEF<br/>
             Module: hopium.sys<br/>
             Description: System ran out of copium. Please install more hopium.<br/><br/>
@@ -288,7 +292,7 @@ export default function Home() {
         <div className="absolute bottom-12 right-4 text-[11px] text-white/30 text-right pointer-events-none select-none">
           NostalgicOS 97<br />
           Evaluation Copy. Build 4.20.69<br />
-          PASTE_CONTRACT_ADDRESS_HERE
+          CONTRACT_SOON
         </div>
       </div>
 
@@ -345,7 +349,7 @@ export default function Home() {
             <div className="flex gap-3 mb-3">
               <div className="text-[48px]">⚠️</div>
               <div className="text-[13px]">
-                <p className="font-bold text-[#800000] mb-1">WARNING: You have entered the $NOSTALGIC zone.</p>
+                <p className="font-bold text-[#800000] mb-1">WARNING: You have entered the $NLGC zone.</p>
                 <p className="mb-1">Side effects may include:</p>
                 <ul className="text-[12px] space-y-[2px] ml-4">
                   <li>• Uncontrollable urge to buy the dip</li>
