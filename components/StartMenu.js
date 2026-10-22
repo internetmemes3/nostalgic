@@ -2,23 +2,21 @@
 import { useState } from 'react';
 
 const PROGRAMS = [
+  { id: 'coin', icon: '/icons/logo.png', label: 'Nostalgic' },
   { id: 'mycomputer', icon: '/icons/mycomputer.jpg', label: 'My Computer' },
   { id: 'internet', icon: '/icons/internet.png', label: 'Internet Exploder' },
-  { id: 'msdank', icon: '/icons/paint.png', label: 'MS Dank' },
+  { id: 'toys', icon: '🧰', label: 'Toy Box' },
+  { id: 'msdank', icon: '/icons/paint.png', label: 'Nostalgic Paint' },
   { id: 'notepad', icon: '/icons/notepad.png', label: 'note_to_the_future.txt' },
   { id: 'minesweeper', icon: '/icons/minesweeper.png', label: 'Minesweeper' },
   { id: 'recycle', icon: '/icons/recycle.png', label: 'Recycle Bin' },
+  { id: 'donotclick', icon: '🚫', label: 'DO NOT CLICK' },
+  { id: 'screensaver', icon: '🌙', label: 'Screen Saver' },
 ];
 
 const SILLY_PROGRAMS = [
-  { icon: '📞', label: 'Dial-Up Connector', action: () => alert('🔊 BEEEE BOOO BRRRRR KSSSHHHH DINGDINGDING\n\nConnecting to the internet...\n\nSpeed: 56kbps (on a good day)\n\n⚠️ WARNING: Someone is trying to call the house. Connection will be lost.') },
-  { icon: '🧮', label: 'Portfolio Calculator', action: () => alert('PORTFOLIO CALCULATOR v1.0\n\nCalculating your gains...\n\n...\n...\n\nResult: ✨ INCALCULABLE ✨\n\n(this calculator only goes up)') },
-  { icon: '🦠', label: 'Norton AntiRug 2003', action: () => alert('🛡️ NORTON ANTIRUG 2003\n\nScanning for rugs...\n\nC:\\definitely_not_a_rug.exe — CLEAN ✅\nC:\\trust_me_bro.dll — CLEAN ✅\nSummary: Your bags are safe. Probably. We are not liable.') },
-  { icon: '🗺️', label: 'Roadmap.exe', action: () => alert('LOADING ROADMAP...\n\n❌ Error: File not found.\n\nThe roadmap was last seen heading north.\nIf found, please return to $NLGC headquarters\n(which is someone\'s basement).') },
-  { icon: '🎰', label: 'luck_check.exe', action: () => { const outcomes = ['You will 100x by Friday. (not financial advice)', 'A mysterious whale is watching your wallet. Stay calm.', 'Your next trade will be legendary. Or terrible. 50/50.', 'The stars say: BUY. The stars are not financial advisors.', 'You will find a forgotten wallet with 0.001 SOL. Life changing.', 'A dev will follow you on Twitter today. This means nothing.']; alert('🔮 LUCK CHECK v4.20\n\n' + outcomes[Math.floor(Math.random() * outcomes.length)]); }},
   { icon: '🪩', label: 'party.exe', action: () => { document.body.classList.add('rave-mode'); const emojis = ['🚀','🌕','💎','💰','✨','🔥']; for(let i=0;i<20;i++){const el=document.createElement('div');el.className='float-emoji';el.textContent=emojis[Math.floor(Math.random()*emojis.length)];el.style.left=Math.random()*window.innerWidth+'px';el.style.top=(window.innerHeight*0.3+Math.random()*window.innerHeight*0.5)+'px';el.style.animationDelay=(Math.random()*1)+'s';document.body.appendChild(el);setTimeout(()=>el.remove(),2500);} setTimeout(()=>document.body.classList.remove('rave-mode'),2000); }},
   { icon: '🔄', label: 'screen_flip.exe', action: () => { document.body.style.transition='transform 1s';document.body.style.transform='scaleY(-1)';setTimeout(()=>{document.body.style.transform='none';setTimeout(()=>{document.body.style.transition='';},500);},2000); }},
-  { icon: '💾', label: 'download_more_ram.exe', action: () => { const w=window.open('','','width=340,height=120');if(w){w.document.write('<html><head><title>Downloading RAM...</title></head><body style="background:#c0c0c0;font-family:VT323,monospace;padding:15px"><b>Downloading 69GB of RAM...</b><br><br><div style="border:2px inset #808080;height:18px;background:#fff"><div style="height:100%;background:linear-gradient(90deg,#000080,#0000cc);animation:fill 3s ease-in-out forwards"></div></div><style>@keyframes fill{from{width:0}to{width:100%}}</style><br><span id="s">Please wait...</span><script>setTimeout(function(){document.getElementById("s").textContent="\u2705 Complete! Your computer now has 69GB more RAM. (It doesn\'t.)"}, 3000);<\/script></body></html>'); } }},
 ];
 
 export default function StartMenu({ onItemClick }) {
@@ -52,7 +50,7 @@ export default function StartMenu({ onItemClick }) {
       <div className="flex">
         {/* Sidebar */}
         <div className="start-menu-sidebar">
-          Nostalgic<span style={{ fontWeight: 'normal', fontSize: '12px' }}>97</span>
+          NostalgicOS <span style={{ fontWeight: 800 }}>98</span>
         </div>
 
         {/* Menu Items */}
@@ -62,6 +60,7 @@ export default function StartMenu({ onItemClick }) {
             className="start-menu-item relative"
             onMouseEnter={() => setShowPrograms(true)}
             onMouseLeave={() => setShowPrograms(false)}
+            onClick={() => setShowPrograms((open) => !open)}
           >
             <img src="/icons/mycomputer.jpg" alt="" style={{ width: '20px', height: '20px' }} />
             <span className="flex-1">Programs</span>
@@ -71,12 +70,19 @@ export default function StartMenu({ onItemClick }) {
             {showPrograms && (
               <div className="absolute left-full bottom-0 bg-[#c0c0c0] border-2 min-w-[220px] max-h-[calc(100vh-50px)] overflow-y-auto"
                 style={{ borderColor: '#fff #0a0a0a #0a0a0a #fff', boxShadow: '2px 2px 0 #000' }}>
-                {PROGRAMS.map(item => (
-                  <div key={item.id} className="start-menu-item" onClick={() => onItemClick(item.id)}>
-                    <img src={item.icon} alt="" style={{ width: '20px', height: '20px' }} />
-                    <span>{item.label}</span>
-                  </div>
-                ))}
+                {PROGRAMS.map(item => {
+                  const emoji = item.icon && !item.icon.startsWith('/') && !item.icon.startsWith('http');
+                  return (
+                    <div key={item.id} className="start-menu-item" onClick={() => onItemClick(item.id)}>
+                      {emoji ? (
+                        <span style={{ fontSize: '16px', width: '20px', textAlign: 'center' }}>{item.icon}</span>
+                      ) : (
+                        <img src={item.icon} alt="" style={{ width: '20px', height: '20px' }} />
+                      )}
+                      <span>{item.label}</span>
+                    </div>
+                  );
+                })}
                 <div className="context-menu-divider" />
                 <div className="px-2 py-1 text-[10px] text-[#808080]">Accessories</div>
                 {SILLY_PROGRAMS.map((prog, i) => (
@@ -94,7 +100,7 @@ export default function StartMenu({ onItemClick }) {
           {/* Quick launch items */}
           <div className="start-menu-item" onClick={() => onItemClick('coin')}>
             <img src="/icons/logo.png" alt="" style={{ width: '20px', height: '20px' }} />
-            <span>$NLGC Info</span>
+            <span>Nostalgic</span>
           </div>
           <div className="start-menu-item" onClick={() => onItemClick('notepad')}>
             <img src="/icons/notepad.png" alt="" style={{ width: '20px', height: '20px' }} />

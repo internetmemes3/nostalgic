@@ -1,4 +1,5 @@
 'use client';
+import { CONTRACT_LABEL, DEXSCREENER_URL, TELEGRAM_URL, X_URL, openExternal } from '../../lib/site';
 import { useState, useEffect } from 'react';
 
 const FAKE_ADS = [
@@ -45,7 +46,7 @@ export default function InternetExploder() {
   };
 
   return (
-    <div style={{ width: '620px', maxWidth: '90vw' }} className="relative">
+    <div style={{ width: 'min(620px, 100%)' }} className="relative">
       {/* Annoying popup ad */}
       {showPopup && (
         <div className="absolute top-8 right-4 z-50 bg-[#ffffcc] border-2 border-[#ff0000] p-2 text-[11px] text-black shadow-md"
@@ -57,14 +58,14 @@ export default function InternetExploder() {
       )}
 
       {/* Browser toolbar */}
-      <div className="flex items-center gap-1 px-1 py-1 bg-[#c0c0c0] border-b border-[#808080]">
+      <div className="flex flex-wrap items-center gap-1 px-1 py-1 bg-[#c0c0c0] border-b border-[#808080]">
         <button className="win95-button text-[11px] px-2 py-0" onClick={() => triggerPopup('There is no going back. Only forward. This is crypto.')}>⬅ Back</button>
         <button className="win95-button text-[11px] px-2 py-0" onClick={() => triggerPopup('You are already in the future. The future is $NLGC.')}>➡ Forward</button>
         <button className="win95-button text-[11px] px-2 py-0" onClick={() => triggerPopup('ERROR: Cannot stop. The blockchain has no brakes.')}>🛑 Stop</button>
         <button className="win95-button text-[11px] px-2 py-0" onClick={() => { setHits(h => h + Math.floor(Math.random() * 1000)); triggerPopup('Page refreshed. You are now 1000x more bullish.'); }}>🔄 Refresh</button>
         <button className="win95-button text-[11px] px-2 py-0" onClick={() => triggerPopup('🏠 Home page set to: $NLGC\n\nYour browser homepage has been permanently changed. You\'re welcome.')}>🏠 Home</button>
       </div>
-      <div className="flex items-center gap-1 px-1 py-1 bg-[#c0c0c0] border-b border-[#808080]">
+      <div className="flex flex-wrap items-center gap-1 px-1 py-1 bg-[#c0c0c0] border-b border-[#808080]">
         <span className="text-[11px] font-bold">Address:</span>
         <div className="flex-1 bg-white border px-1 text-[11px]" style={{ boxShadow: 'inset 1px 1px #808080' }}>
           http://www.geocities.com/Area51/Vault/4269/nostalgic_official.html
@@ -87,7 +88,7 @@ export default function InternetExploder() {
             ★·.·´¯`·.·★ $NLGC ★·.·´¯`·.·★
           </div>
           <div className="text-[#ff00ff] text-[14px] mb-1">
-            ~ The Only Website That Matters ~
+            ~ running on NostalgicOS 98 · the only website that matters ~
           </div>
           <div className="text-[#ffff00] text-[11px] blink mb-2">
             ⚠️ BEST VIEWED WITH INTERNET EXPLODER 4.0 AT 800x600 ⚠️
@@ -119,7 +120,7 @@ export default function InternetExploder() {
           {/* Marquee */}
           <div className="marquee-container mb-4 border-y border-[#00ff00] py-1">
             <div className="marquee-content text-[#ff0] text-[14px]">
-              📢 BREAKING NEWS: $NLGC has been officially recognized by absolutely nobody of importance!! 📢 Chart looking like the pipes screensaver!! 📢 Dev is alive and simply built different!! 📢 Ticker is $NLGC because we ran out of vowels!! 📢
+              📢 BREAKING NEWS: $NLGC has been officially recognized by absolutely nobody of importance!! 📢 Chart looking like the pipes screensaver!! 📢 Ticker is $NLGC because we ran out of vowels!! 📢
             </div>
           </div>
 
@@ -127,7 +128,6 @@ export default function InternetExploder() {
           <div className="border border-[#00ffff] p-2 mb-4 text-left bg-[#000044]">
             <div className="text-[#00ffff] text-[16px] mb-2 text-center">❓ F.A.Q. (Frequently Avoided Questions) ❓</div>
             <div className="text-[12px] space-y-2 text-[#0f0]">
-              <p><span className="text-[#ff0]">Q: Is this a scam?</span><br/>A: sir this is a geocities website. does this LOOK like we have the organizational skills to scam anyone?</p>
               <p><span className="text-[#ff0]">Q: When moon?</span><br/>A: the moon is a mindset.</p>
               <p><span className="text-[#ff0]">Q: Do you have a whitepaper?</span><br/>A: we have a white notepad document with 3 bullet points and a drawing of a rocket. close enough.</p>
               <p><span className="text-[#ff0]">Q: Is the dev doxxed?</span><br/>A: the dev is a text file from 1999 found on a hard drive at goodwill. make of that what you will.</p>
@@ -153,8 +153,8 @@ export default function InternetExploder() {
             <ol className="text-[13px] text-[#00ff00] space-y-1 list-decimal list-inside">
               <li>Get a wallet (it lives in your browser)</li>
               <li>Buy some SOL (the fast money that goes zoom)</li>
-              <li>Go to Jupiter or Raydium (space themed exchanges, very on brand)</li>
-              <li>Paste the contract address: <span className="text-[#ff0] break-all">CONTRACT_SOON</span></li>
+              <li>Go to a DEX(space themed exchanges, very on brand)</li>
+              <li>Paste the contract address: <span className="text-[#ff0] break-all">{CONTRACT_LABEL}</span></li>
               <li>Swap SOL for $NLGC (Nostalgic)</li>
               <li>Tell your friends, your enemies, your dentist, everyone</li>
               <li>There is no step 7. You are done. Congratulations. You are now nostalgic.</li>
@@ -184,9 +184,9 @@ export default function InternetExploder() {
           <div className="mb-4 text-[14px]">
             <div className="text-[#ff00ff] mb-2">🔗 IMPORTANT LINKS 🔗</div>
             <div className="space-y-1">
-              <div><a href="#" className="text-[#00ffff] underline hover:text-[#ff0]" onClick={(e) => { e.preventDefault(); window.open('https://x.com/nostalgicSolana', '_blank'); }}>📱 Twitter/X</a> - follow us before we get banned (again)</div>
-              <div><a href="#" className="text-[#00ffff] underline hover:text-[#ff0]" onClick={(e) => { e.preventDefault(); window.open('https://t.me/NostalgicPanel', '_blank'); }}>💬 Telegram</a> - 24/7 chaos. no mods. we lost them.</div>
-              <div><a href="#" className="text-[#00ffff] underline hover:text-[#ff0]" onClick={(e) => { e.preventDefault(); window.open('https://dexscreener.com/PLACEHOLDER', '_blank'); }}>📊 Chart</a> - stare at the line. feel things. this is financial meditation.</div>
+              <div><a href={X_URL} className="text-[#00ffff] underline hover:text-[#ff0]" target="_blank" rel="noopener noreferrer" onClick={(e) => { e.preventDefault(); openExternal(X_URL); }}>📱 Twitter/X</a> - follow us before we get banned (again)</div>
+              <div><a href={TELEGRAM_URL} className="text-[#00ffff] underline hover:text-[#ff0]" target="_blank" rel="noopener noreferrer" onClick={(e) => { e.preventDefault(); openExternal(TELEGRAM_URL); }}>💬 Telegram</a> - 24/7 chaos. no mods. we lost them.</div>
+              <div><a href={DEXSCREENER_URL || undefined} className="text-[#00ffff] underline hover:text-[#ff0]" target="_blank" rel="noopener noreferrer" onClick={(e) => { e.preventDefault(); openExternal(DEXSCREENER_URL); }}>📊 Chart</a> - stare at the line. feel things. this is financial meditation.</div>
             </div>
           </div>
 

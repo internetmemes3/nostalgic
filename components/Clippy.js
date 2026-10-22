@@ -8,7 +8,7 @@ const CLIPPY_MESSAGES = [
   "TIP: If you turn your monitor upside down, the chart is going up!",
   "It looks like you're writing a message to your ex about $NLGC. I would advise against this.",
   "REMINDER: You left the oven on. Also, $NLGC is still a good investment. Probably.",
-  "Fun fact: This paperclip was made in 1997 and has seen things you wouldn't believe.",
+  "Fun fact: This paperclip shipped with NostalgicOS 98 and has seen every page that said under construction.",
   "I notice you haven't told your friends about $NLGC yet. That's weird. Do it now.",
   "ALERT: Your portfolio needs emotional support. I'm here for you. I'm a paperclip.",
   "Would you like to: [A] Buy more $NLGC [B] Buy even more $NLGC [C] Close this (not available)",
@@ -56,7 +56,7 @@ export default function Clippy({ onClose }) {
   if (!visible) return null;
 
   return (
-    <div className="fixed top-4 right-4 z-[8000] flex items-start gap-2"
+    <div className="fixed top-3 right-3 z-[8000] flex items-start gap-2"
       style={{ transition: 'transform 0.3s', transform: bouncing ? 'translateY(-8px)' : 'translateY(0)' }}>
       {/* Clippy "icon" */}
       <div className="text-[40px] cursor-pointer select-none" onClick={nextMessage}

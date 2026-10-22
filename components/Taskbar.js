@@ -1,15 +1,20 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { LINKS } from '../lib/site';
 
-export default function Taskbar({ onStartClick, startOpen, openWindows, onWindowClick }) {
+export default function Taskbar({ onStartClick, startOpen, openWindows, onWindowClick, onShowDesktop }) {
   const [currentTime, setCurrentTime] = useState('');
+  const [currentDate, setCurrentDate] = useState('');
 
   useEffect(() => {
     const update = () => {
       const now = new Date();
-      setCurrentTime(now.toLocaleTimeString('en-US', {
-        hour: '2-digit',
-        minute: '2-digit',
+      setCurrentTime(now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' }));
+      setCurrentDate(now.toLocaleDateString('en-US', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
       }));
     };
     update();
@@ -18,39 +23,64 @@ export default function Taskbar({ onStartClick, startOpen, openWindows, onWindow
   }, []);
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 h-[40px] bg-[#c0c0c0] z-[3000]"
-      style={{ boxShadow: 'inset 0 1px 0 #fff' }}>
-      <div className="flex items-center h-full px-1 gap-1">
-        {/* Start Button */}
-        <button
-          className={`win95-button px-2 py-[2px] flex items-center gap-1 h-[30px] font-bold text-[14px] ${startOpen ? 'border-[#0a0a0a] border-r-[#dfdfdf] border-b-[#dfdfdf]' : ''}`}
-          onClick={(e) => { e.stopPropagation(); onStartClick(); }}
-        >
-          <img src="/icons/win.png" alt="Start" style={{ width: '20px', height: '20px' }} draggable="false" />
-          <span>Start</span>
+    <div className="os-taskbar">
+      <button
+        type="button"
+        className={`win95-button start-button ${startOpen ? 'is-pressed' : ''}`}
+        onClick={(e) => { e.stopPropagation(); onStartClick(); }}
+      >
+        <img src="/icons/logo.png" alt="" draggable="false" />
+        <span>Start</span>
+      </button>
+
+      <div className="win95-taskbar-divider" />
+
+      <div className="quick-launch">
+        {LINKS.map((item) => (
+          <a
+            key={item.id}
+            className="quick-launch-btn quick-link"
+            href={item.href || undefined}
+            target={item.href ? '_blank' : undefined}
+            rel={item.href ? 'noopener noreferrer' : undefined}
+            title={item.href ? item.label : `${item.label} — add the link in .env.local`}
+            onClick={(e) => {
+              e.stopPropagation();
+              if (!item.href) e.preventDefault();
+            }}
+          >
+            <span className="quick-link-full">{item.label}</span>
+            <span className="quick-link-short">{item.short}</span>
+          </a>
+        ))}
+        <button type="button" className="quick-launch-btn" title="Show Desktop" onClick={onShowDesktop}>
+          <span className="show-desktop-glyph" />
         </button>
+      </div>
 
-        <div className="win95-taskbar-divider mx-1 h-[28px]" />
+      <div className="win95-taskbar-divider" />
 
-        {/* Open Window Buttons */}
-        <div className="flex-1 flex items-center gap-1 overflow-hidden">
-          {openWindows.map(win => (
-            <button
-              key={win.id}
-              className={`win95-button px-2 py-[2px] h-[26px] text-[12px] truncate max-w-[140px] ${win.active ? 'border-[#0a0a0a] border-r-[#dfdfdf] border-b-[#dfdfdf]' : ''}`}
-              onClick={() => onWindowClick(win.id)}
-            >
-              {win.title}
-            </button>
-          ))}
-        </div>
+      <div className="task-buttons">
+        {openWindows.map((win) => (
+          <button
+            key={win.id}
+            type="button"
+            className={`win95-button task-button ${win.active ? 'is-pressed' : ''}`}
+            onClick={() => onWindowClick(win.id)}
+            title={win.title}
+          >
+            {win.icon && (win.icon.startsWith('/') || win.icon.startsWith('http')
+              ? <img src={win.icon} alt="" draggable="false" />
+              : <span className="task-emoji">{win.icon}</span>)}
+            <span>{win.title}</span>
+          </button>
+        ))}
+      </div>
 
-        {/* System Tray */}
-        <div className="flex items-center gap-2 h-[28px] px-2"
-          style={{ boxShadow: 'inset 1px 1px #808080, inset -1px -1px #fff' }}>
-          <span className="text-[11px]" title="Volume">🔊</span>
-          <span className="text-[13px] font-mono">{currentTime}</span>
-        </div>
+      <div className="tray" title={`${currentDate}\nNostalgicOS 98`}>
+        <img src="/icons/logo.png" alt="" className="tray-logo" title="NostalgicOS 98" draggable="false" />
+        <span className="tray-vol" title="Volume — dial-up loudness: maximum">🔊</span>
+        <span className="tray-clock">{currentTime}</span>
       </div>
     </div>
   );

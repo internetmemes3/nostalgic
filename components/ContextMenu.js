@@ -25,7 +25,7 @@ function spawnEmojiBurst(x, y, emojis = ['🚀','🌕','💎','🙌','💰','�
   }
 }
 
-export default function ContextMenu({ x, y, onClose, onOpenWindow, onClippy, onBSOD }) {
+export default function ContextMenu({ x, y, onClose, onOpenWindow, onClippy, onBSOD, onScreensaver, onInstall }) {
   const [alertMsg, setAlertMsg] = useState(null);
 
   useEffect(() => {
@@ -136,6 +136,15 @@ export default function ContextMenu({ x, y, onClose, onOpenWindow, onClippy, onB
         🫠 Reality Distortion Field
       </div>
       <div className="context-menu-divider" />
+      <div className="context-menu-item" onClick={(e) => { e.stopPropagation(); onOpenWindow('toys'); onClose(); }}>
+        🧰 Toy Box
+      </div>
+      <div className="context-menu-item" onClick={(e) => { e.stopPropagation(); onInstall && onInstall(); onClose(); }}>
+        🔧 Install the toolbar
+      </div>
+      <div className="context-menu-item" onClick={(e) => { e.stopPropagation(); onScreensaver && onScreensaver(); onClose(); }}>
+        🌙 Screen saver
+      </div>
       <div className="context-menu-item" onClick={(e) => { e.stopPropagation(); onClippy && onClippy(); onClose(); }}>
         📎 Summon Clippy
       </div>

@@ -1,6 +1,12 @@
 'use client';
 
 const DELETED_ITEMS = [
+  { icon: '🏙️', name: 'geocities.html', origLocation: 'D:\\Web\\Neighborhood', date: '10/26/2009', size: 'deleted by Yahoo', reason: 'The whole neighborhood was bulldozed. Your visitor counter went with it.' },
+  { icon: '🎧', name: 'shared_song.mp3', origLocation: 'C:\\Napster\\Incoming', date: '07/11/2001', size: 'lawsuit.mp3', reason: 'The song was 128kbps and the lawyers were lossless.' },
+  { icon: '⚡', name: 'intro.swf', origLocation: 'C:\\Flash\\Intros', date: '12/31/2020', size: 'skip intro', reason: 'Flash died and took every restaurant website with it.' },
+  { icon: '🐧', name: 'club_penguin.dat', origLocation: 'C:\\Igloo', date: '03/29/2017', size: 'puffle missing', reason: 'The servers went quiet. The puffles were never found.' },
+  { icon: '📼', name: 'vine_loop.mp4', origLocation: 'C:\\6sec', date: '01/17/2017', size: '6.0 sec', reason: 'It looped forever, until it didn\'t.' },
+  { icon: '💿', name: 'mix_cd.iso', origLocation: 'E:\\CD Burner', date: '02/14/2002', size: '700 MB of feelings', reason: 'Track 1 was a voice memo that just said "do not skip".' },
   { icon: '🪦', name: 'FTX_account_balance.pdf', origLocation: 'C:\\Definitely Safe\\Exchange', date: '11/11/2022', size: '$32B → jail', reason: 'Your funds are safu (narrator: they were not)' },
   { icon: '🔥', name: 'BitConnect_gains.doc', origLocation: 'C:\\Too Good To Be True', date: '01/17/2018', size: 'WASAWASAWASA', reason: 'Hey hey heyyyy' },
   { icon: '💩', name: 'SafeMoon_is_safe.txt', origLocation: 'C:\\Copium\\Maximum', date: '04/20/2023', size: '99.9% down', reason: 'Safe? Moon? Neither.' },
@@ -23,7 +29,7 @@ export default function RecycleBin() {
 
       {/* Description */}
       <div className="px-2 py-1 text-[11px] text-[#808080] border-b border-[#808080]">
-        🗑️ Recycle Bin — Contains items that have been permanently rugged from crypto history
+        Recycle Bin — things the internet deleted, plus a few wallets
       </div>
 
       {/* File List */}

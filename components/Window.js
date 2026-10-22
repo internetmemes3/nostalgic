@@ -1,32 +1,55 @@
 'use client';
 import React, { useRef, useState, useCallback, useEffect } from 'react';
 
-const Window = ({ id, title, children, onClose, onFocus, onMinimize, style, zIndex = 10, isActive = true, defaultPos }) => {
-  const windowRef = useRef(null);
-  const [pos, setPos] = useState(defaultPos || { x: 80 + Math.random() * 200, y: 40 + Math.random() * 100 });
-  const [size, setSize] = useState(null);
+const Window = ({
+  id,
+  title,
+  icon,
+  children,
+  onClose,
+  onFocus,
+  onMinimize,
+  style,
+  zIndex = 10,
+  isActive = true,
+  defaultPos,
+  dialog = false,
+}) => {
+  const [pos, setPos] = useState(defaultPos || { x: 96, y: 48 });
   const [maximized, setMaximized] = useState(false);
   const [dragging, setDragging] = useState(false);
   const dragOffset = useRef({ x: 0, y: 0 });
   const prevPos = useRef(pos);
 
+  useEffect(() => {
+    if (defaultPos) return;
+    const n = id ? id.split('').reduce((sum, ch) => sum + ch.charCodeAt(0), 0) : 40;
+    const maxX = Math.max(12, window.innerWidth - 520);
+    const maxY = Math.max(12, window.innerHeight - 420);
+    setPos({
+      x: Math.min(88 + (n % 5) * 18, maxX),
+      y: Math.min(20 + (n % 4) * 18, maxY),
+    });
+  }, [id, defaultPos]);
+
   const handleMouseDown = useCallback((e) => {
     if (e.target.closest('button')) return;
     onFocus && onFocus();
+    if (maximized) return;
     setDragging(true);
     dragOffset.current = {
       x: e.clientX - pos.x,
       y: e.clientY - pos.y,
     };
     e.preventDefault();
-  }, [pos, onFocus]);
+  }, [pos, onFocus, maximized]);
 
   useEffect(() => {
-    if (!dragging) return;
+    if (!dragging) return undefined;
     const handleMove = (e) => {
       setPos({
-        x: e.clientX - dragOffset.current.x,
-        y: Math.max(0, e.clientY - dragOffset.current.y),
+        x: Math.min(window.innerWidth - 80, e.clientX - dragOffset.current.x),
+        y: Math.max(0, Math.min(window.innerHeight - 48, e.clientY - dragOffset.current.y)),
       });
     };
     const handleUp = () => setDragging(false);
@@ -50,60 +73,52 @@ const Window = ({ id, title, children, onClose, onFocus, onMinimize, style, zInd
   };
 
   const windowStyle = maximized
-    ? { position: 'fixed', left: 0, top: 0, width: '100vw', height: 'calc(100vh - 40px)', zIndex: zIndex }
-    : { position: 'absolute', left: pos.x, top: pos.y, zIndex: zIndex, ...(style || {}) };
+    ? { position: 'fixed', left: 0, top: 0, width: '100vw', height: 'calc(100vh - 34px)', zIndex }
+    : {
+        position: 'absolute',
+        left: pos.x,
+        top: pos.y,
+        zIndex,
+        maxWidth: `calc(100vw - ${Math.max(pos.x, 0) + 16}px)`,
+        ...(style || {}),
+      };
 
   return (
     <div
-      ref={windowRef}
-      className={`bg-[#c0c0c0] flex flex-col ${dragging ? 'win-dragging' : ''}`}
-      style={{
-        ...windowStyle,
-        boxShadow: 'inset -1px -1px #0a0a0a, inset 1px 1px #dfdfdf, 2px 2px 0px #000',
-        minWidth: '280px',
-        minHeight: '120px',
-      }}
+      className={`win98-window flex flex-col ${dragging ? 'win-dragging' : ''}`}
+      style={windowStyle}
       onMouseDown={() => onFocus && onFocus()}
     >
-      {/* Title Bar */}
       <div
-        className={`${isActive ? 'bg-[#000080]' : 'bg-[#808080]'} px-2 py-[2px] flex items-center justify-between select-none shrink-0`}
+        className="win98-titlebar"
+        data-active={isActive ? 'true' : 'false'}
         onMouseDown={handleMouseDown}
-        style={{ cursor: dragging ? 'grabbing' : 'grab' }}
+        onDoubleClick={dialog ? undefined : handleMaximize}
       >
-        <span className="text-white text-[13px] font-bold truncate mr-2"
-          style={{ fontFamily: "'VT323', 'MS Sans Serif', sans-serif" }}>
-          {title}
-        </span>
-        <div className="flex items-center gap-[2px]">
-          {onMinimize && (
-            <button
-              onClick={onMinimize}
-              className="w-[16px] h-[14px] bg-[#c0c0c0] flex items-center justify-center text-[10px]"
-              style={{ border: '1px outset #fff', borderRightColor: '#000', borderBottomColor: '#000' }}
-            >
-              _
+        <div className="win98-title-text">
+          {icon && (icon.startsWith('/') || icon.startsWith('http')
+            ? <img src={icon} alt="" className="win98-title-icon" draggable="false" />
+            : <span className="win98-title-emoji">{icon}</span>)}
+          <span className="truncate">{title}</span>
+        </div>
+        <div className="win98-caption">
+          {onMinimize && !dialog && (
+            <button type="button" className="win98-caption-btn" aria-label="Minimize" onClick={onMinimize}>
+              <span className="win98-min-glyph" />
             </button>
           )}
-          <button
-            onClick={handleMaximize}
-            className="w-[16px] h-[14px] bg-[#c0c0c0] flex items-center justify-center text-[10px]"
-            style={{ border: '1px outset #fff', borderRightColor: '#000', borderBottomColor: '#000' }}
-          >
-            □
-          </button>
-          <button
-            onClick={onClose}
-            className="w-[16px] h-[14px] bg-[#c0c0c0] flex items-center justify-center text-[10px] font-bold"
-            style={{ border: '1px outset #fff', borderRightColor: '#000', borderBottomColor: '#000' }}
-          >
-            ✕
+          {!dialog && (
+            <button type="button" className="win98-caption-btn" aria-label="Maximize" onClick={handleMaximize}>
+              <span className={maximized ? 'win98-restore-glyph' : 'win98-max-glyph'} />
+            </button>
+          )}
+          <button type="button" className="win98-caption-btn win98-close-btn" aria-label="Close" onClick={onClose}>
+            <span className="win98-close-glyph">✕</span>
           </button>
         </div>
       </div>
 
-      {/* Window Body */}
-      <div className="flex-1 overflow-auto" style={{ background: '#c0c0c0' }}>
+      <div className="win98-client flex-1 overflow-auto">
         {children}
       </div>
     </div>

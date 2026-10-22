@@ -13,8 +13,8 @@ const geistMono = localFont({
 });
 
 export const metadata = {
-  title: "NOSTALGIC — NostalgicOS 97",
-  description: "The meme coin that takes you back. Pure internet chaos. NOSTALGIC on Solana.",
+  title: "NostalgicOS 98 — Nostalgic",
+  description: "NostalgicOS 98. A desktop for the internet you miss. Nostalgic ($NLGC) on Solana.",
 };
 
 export default function RootLayout({ children }) {

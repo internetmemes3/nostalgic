@@ -1,30 +1,35 @@
-export default function DesktopIcon({ icon, label, onClick, isActive }) {
-  const isEmoji = !icon.startsWith('/') && !icon.startsWith('http');
+'use client';
+
+import { hurtFilter, useToy } from './ToyPlay';
+
+export default function DesktopIcon({ id, icon, label, onClick }) {
+  const { pieces } = useToy();
+  const hurt = pieces[id];
+  const isEmoji = icon && !icon.startsWith('/') && !icon.startsWith('http');
+  const knocked = hurt && (hurt.x || hurt.y || hurt.rot);
 
   return (
-    <div 
-      onDoubleClick={onClick}
-      className={`
-        flex flex-col items-center w-[72px] p-1 cursor-pointer select-none rounded-[2px]
-        ${isActive ? 'desktop-icon-selected' : 'hover:bg-[#000080]/20'}
-      `}
+    <button
+      type="button"
+      onClick={onClick}
+      className="desktop-icon"
+      data-desk-target={id}
+      style={{
+        transform: knocked ? `translate(${hurt.x}px, ${hurt.y}px) rotate(${hurt.rot}deg)` : undefined,
+      }}
     >
-      <div className="w-[48px] h-[48px] flex items-center justify-center mb-[2px]">
-        {isEmoji ? (
-          <span style={{ fontSize: '36px', lineHeight: 1 }}>{icon}</span>
-        ) : (
-          <img 
-            src={icon} 
-            alt={label}
-            className="w-full h-full object-contain"
-            draggable="false"
-          />
-        )}
-      </div>
-      <span className={`icon-label text-white text-center text-[11px] leading-tight px-[2px] whitespace-pre-line ${isActive ? 'bg-[#000080]' : ''}`}
-        style={{ fontFamily: "'VT323', 'MS Sans Serif', sans-serif", textShadow: '1px 1px 0 #000' }}>
-        {label}
+      <span className="desktop-icon-stack" style={{ filter: hurtFilter(hurt) }}>
+        <div className="desktop-icon-art">
+          {isEmoji ? (
+            <span className="desktop-icon-emoji">{icon}</span>
+          ) : (
+            <img src={icon} alt="" draggable="false" />
+          )}
+          {hurt?.cut > 0 && <span className="desk-slash" aria-hidden="true" />}
+        </div>
+        <span className="icon-label">{label}</span>
       </span>
-    </div>
+      {hurt?.burn > 0 && <span className="desk-flame" aria-hidden="true">🔥</span>}
+    </button>
   );
-} 
+}

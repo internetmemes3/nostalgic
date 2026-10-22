@@ -1,7 +1,12 @@
 'use client';
 import { useState } from 'react';
+import { CONTRACT_LABEL } from '../../lib/site';
 
 const FAKE_FILES = [
+  { icon: '💾', name: 'memories.img', type: 'Floppy Disk', size: '1.44 MB', date: '06/15/1998' },
+  { icon: '💬', name: 'away_message.txt', type: 'Text Document', size: '2 KB', date: '08/03/1999' },
+  { icon: '🎵', name: 'winamp_skin.wsz', type: 'Skin File', size: '420 KB', date: '11/11/1998' },
+  { icon: '🌐', name: 'geocities_backup.zip', type: 'Compressed', size: 'unfinished', date: '04/01/2001' },
   { icon: '📁', name: 'bag_of_holding', type: 'File Folder', size: '∞ KB', date: '01/01/2003' },
   { icon: '📁', name: 'definitely_not_a_rug', type: 'File Folder', size: '0 KB', date: '04/20/2069' },
   { icon: '📄', name: 'tokenomics.xls', type: 'Excel Meme Sheet', size: '420 KB', date: '06/09/2003' },
@@ -20,9 +25,8 @@ const WALLET_STATS = [
   { label: 'Ticker', value: '$NLGC' },
   { label: 'Chain', value: 'Solana (the fast one)' },
   { label: 'Total Supply', value: '1,000,000,000' },
-  { label: 'Tax', value: '0% (we\'re not savages)' },
   { label: 'Liquidity', value: 'LOCKED (pinky promise)' },
-  { label: 'Contract', value: 'CONTRACT_SOON' },
+  { label: 'Contract', value: CONTRACT_LABEL },
   { label: 'Vibe Check', value: '✅ PASSED' },
   { label: 'Rug Status', value: '❌ NOT TODAY SATAN' },
 ];
@@ -51,7 +55,11 @@ export default function MyComputer() {
   const [slotResult, setSlotResult] = useState(null);
 
   const handleFileClick = (fileName) => {
-    if (fileName === 'dev_wallet.exe') alert('ACCESS DENIED\n\nNice try, fren. The dev wallet is a myth.\nLike Bigfoot. But with more SOL.');
+    if (fileName === 'memories.img') alert('💾 A:\\MEMORIES.IMG\n\nContents:\n  dial_up.wav\n  first_email.txt\n  autoplay.mid\n  a folder named NEW FOLDER (3)\n\nDisk is full. It has been full since 1998.\nThat is the point.');
+    else if (fileName === 'away_message.txt') alert('💬 away_message.txt\n\naway — mom needs the phone\n\nbrb\n\nASL?\n\n(auto-reply has been running for 28 years)');
+    else if (fileName === 'winamp_skin.wsz') alert('🎵 PLAYER SKIN\n\nIt looks like a car stereo designed by someone who just discovered bevels.\n\nVisualization: the little bars are going absolutely feral.\n\n★ NostalgicOS 98 ★');
+    else if (fileName === 'geocities_backup.zip') alert('🌐 GEOCITIES_BACKUP.ZIP\n\nExtracting...\n\nindex.html .......... under construction\nguestbook.cgi ....... 4 real humans, 400 bots\nmidi/welcome.mid .... cannot be stopped\n\nYahoo deleted the city. We kept a floppy.');
+    else if (fileName === 'dev_wallet.exe') alert('ACCESS DENIED\n\nNice try, fren. The dev wallet is a myth.\nLike Bigfoot. But with more SOL.');
     else if (fileName === 'whitepaper.doc') alert('WHITEPAPER.DOC\n\n1. Make coin\n2. ???\n3. Profit\n\n[END OF DOCUMENT]');
     else if (fileName === 'dial_up_sound.wav') alert('🔊 BEEEE BOOO BRRRRR KSSSHHHH DINGDINGDING\n\n(imagine the dial-up sound here)');
     else if (fileName === 'chart_going_up.bmp') {
@@ -59,7 +67,7 @@ export default function MyComputer() {
       setTimeout(() => document.body.classList.remove('dramatic-zoom'), 600);
       alert('📈 Cannot render image.\nChart is going UP too fast for your display.\n\nYour monitor is now permanently tilted upward.');
     }
-    else if (fileName === 'tokenomics.xls') alert('TOKENOMICS.XLS\n\n100% of supply = vibes\n0% = dev wallet\nTax: 0%\nLP: Burned\n\nSource: trust me bro');
+    else if (fileName === 'tokenomics.xls') alert('TOKENOMICS.XLS\n\n100% of supply = vibes\n0% = dev wallet\n\nLP: Burned\n\nSource: trust me bro');
     else if (fileName === 'bag_of_holding') alert('📁 Opening folder...\n\n📂 bag_of_holding/\n  └── more_bags/\n       └── even_more_bags/\n            └── inception_bags/\n                 └── README.txt: "you are in too deep"');
     else if (fileName === 'definitely_not_a_rug') alert('📁 Opening folder...\n\nThis folder is EMPTY.\n\nSee? Not a rug. Told you.\nStop being suspicious.\nWe are offended, honestly.');
     else if (fileName === 'liquidity.locked') {
@@ -116,7 +124,7 @@ export default function MyComputer() {
       {/* Virus Scan Progress */}
       {scanning && (
         <div className="px-2 py-1 bg-[#ffffcc] border-b border-[#808080] text-[11px]">
-          <div className="mb-1">🛡️ Norton AntiRug is scanning your files...</div>
+          <div className="mb-1">🛡️ Nostalgic AntiRug 98 is scanning your files...</div>
           <div className="w-full h-[14px] bg-white border border-[#808080]" style={{ boxShadow: 'inset 1px 1px #808080' }}>
             <div className="fake-progress-fill" />
           </div>
@@ -133,7 +141,7 @@ export default function MyComputer() {
         <span className="text-[12px] font-bold">Address:</span>
         <div className="flex-1 bg-white border border-[#808080] px-1 text-[12px]"
           style={{ boxShadow: 'inset 1px 1px #0a0a0a' }}>
-          C:\My_Bags\$NLGC\to_the_moon
+          C:\NostalgicOS\Memories\$NLGC
         </div>
       </div>
 
